@@ -1,8 +1,27 @@
 <project name="AlphaCiv" default="help" basedir=".">
+	<property name="source-directory" value="src" />
+	<property name="test-source-directory" value="test" />
+	<property name="build-directory" value="bin" />
+
+	<path id="class-path">
+		<pathelement location="${build-directory}" />
+	</path>
+
 	<target name="help">
 		<echo>
 AlphaCiv build management.
 Written by Jonathan Chaffer.
 		</echo>
 	</target>
+
+	<target name="prepare">
+		<mkdir dir="${build-directory}" />
+	</target>
+
+	<target name="build-src" depends="prepare">
+		<javac srcdir="${source-directory}" destdir="${build-directory}">
+			<classpath refid="class-path" />
+		</javac>
+	</target>
+
 </project>
