@@ -2,9 +2,11 @@
 	<property name="source-directory" value="src" />
 	<property name="test-source-directory" value="test" />
 	<property name="build-directory" value="bin" />
+	<property name="junit-jar" value="lib/junit-4.4.jar" />
 
 	<path id="class-path">
 		<pathelement location="${build-directory}" />
+		<pathelement location="${junit-jar}" />
 	</path>
 
 	<target name="help">
@@ -20,6 +22,12 @@ Written by Jonathan Chaffer.
 
 	<target name="build-src" depends="prepare">
 		<javac srcdir="${source-directory}" destdir="${build-directory}">
+			<classpath refid="class-path" />
+		</javac>
+	</target>
+
+	<target name="build-test" depends="build-src">
+		<javac srcdir="${test-source-directory}" destdir="${build-directory}">
 			<classpath refid="class-path" />
 		</javac>
 	</target>
