@@ -1,3 +1,5 @@
+package alphaciv.domain;
+
 /** Collection of constants used in HotCiv Game. Note that strings are
  * used instead of enumeration types to keep the set of valid
  * constants open to extensions by future HotCiv variants.  Enums can

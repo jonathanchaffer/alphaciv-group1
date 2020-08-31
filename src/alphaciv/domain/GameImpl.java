@@ -1,3 +1,5 @@
+package alphaciv.domain;
+
 /** Skeleton implementation of HotCiv.
  
    This source code is from the book 

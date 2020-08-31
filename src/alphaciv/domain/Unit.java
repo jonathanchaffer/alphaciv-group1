@@ -1,3 +1,5 @@
+package alphaciv.domain;
+
 /** Represents a single unit in the game.
 
 Responsibilities:

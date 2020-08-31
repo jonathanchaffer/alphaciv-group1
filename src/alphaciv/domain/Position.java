@@ -1,3 +1,5 @@
+package alphaciv.domain;
+
 /** Position on the world map.
     
     Responsibilities:

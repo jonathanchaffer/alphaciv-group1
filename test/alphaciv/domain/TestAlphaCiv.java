@@ -1,3 +1,5 @@
+package alphaciv.domain;
+
 import org.junit.*;
 import static org.junit.Assert.*;
 

@@ -1,3 +1,5 @@
+package alphaciv.domain;
+
 /** Tile represents a single territory tile of a given type.
 
     Responsibilities:
