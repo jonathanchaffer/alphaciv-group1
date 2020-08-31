@@ -31,7 +31,14 @@ Written by Jonathan Chaffer.
 			<classpath refid="class-path" />
 		</javac>
 	</target>
-	
-	<target name="build-all" depends="build-src,build-test"/>
+
+	<target name="build-all" depends="build-src,build-test" />
+
+	<target name="test" depends="build-all">
+		<java classname="org.junit.runner.JUnitCore">
+			<arg value="alphaciv.domain.TestAlphaCiv" />
+			<classpath refid="class-path" />
+		</java>
+	</target>
 
 </project>
