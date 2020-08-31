@@ -31,5 +31,7 @@ Written by Jonathan Chaffer.
 			<classpath refid="class-path" />
 		</javac>
 	</target>
+	
+	<target name="build-all" depends="build-src,build-test"/>
 
 </project>
