@@ -15,6 +15,10 @@ AlphaCiv build management.
 Written by Jonathan Chaffer.
 		</echo>
 	</target>
+	
+	<target name="clean">
+	    <delete dir="${build-directory}"/>
+	  </target>
 
 	<target name="prepare">
 		<mkdir dir="${build-directory}" />
