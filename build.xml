@@ -1,0 +1,8 @@
+<project name="AlphaCiv" default="help" basedir=".">
+	<target name="help">
+		<echo>
+AlphaCiv build management.
+Written by Jonathan Chaffer.
+		</echo>
+	</target>
+</project>
