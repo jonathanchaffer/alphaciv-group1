@@ -2,6 +2,7 @@
 	<property name="source-directory" value="src" />
 	<property name="test-source-directory" value="test" />
 	<property name="build-directory" value="bin" />
+	<property name="javadoc-directory" value="javadoc" />
 	<property name="junit-jar" value="lib/junit-4.4.jar" />
 
 	<path id="class-path">
@@ -15,10 +16,10 @@ AlphaCiv build management.
 Written by Jonathan Chaffer.
 		</echo>
 	</target>
-	
+
 	<target name="clean">
-	    <delete dir="${build-directory}"/>
-	  </target>
+		<delete dir="${build-directory}" />
+	</target>
 
 	<target name="prepare">
 		<mkdir dir="${build-directory}" />
@@ -45,4 +46,9 @@ Written by Jonathan Chaffer.
 		</java>
 	</target>
 
+	<target name="javadoc" depends="prepare">
+		<javadoc packagenames="alphaciv.*" destdir="${javadoc-directory}" sourcepath="${source-directory}" windowtitle="AlphaCiv">
+			<classpath refid="class-path" />
+		</javadoc>
+	</target>
 </project>
