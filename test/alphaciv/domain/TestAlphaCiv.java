@@ -41,7 +41,7 @@ public class TestAlphaCiv {
 		Tile t = game.getTileAt(new Position(1, 0));
 		assertNotNull("There should be a tile at (1,0)", t);
 		String type = t.getTypeString();
-		assertEquals("Tile at (1,0) should have type ocean", "ocean", type);
+		assertEquals("Tile at (1,0) should have type ocean", GameConstants.OCEANS, type);
 	}
 
 }

@@ -13,16 +13,20 @@ package alphaciv.domain;
  */
 
 public class GameImpl implements Game {
-	static int BOARDSIZE = 16; 
-	private Object[][] board = new Object[BOARDSIZE][BOARDSIZE]; 
+	static int BOARDSIZE = 16;
+	private Object[][] board = new Object[BOARDSIZE][BOARDSIZE];
 	private Player playerInTurn;
-	
+
 	public GameImpl() {
 		board[1][1] = new CityImpl(Player.RED);
+		board[1][0] = new TileImpl(GameConstants.OCEANS);
 		playerInTurn = Player.RED;
 	}
-	
+
 	public Tile getTileAt(Position p) {
+		Object objectAtPosition = board[p.getRow()][p.getColumn()];
+		if (objectAtPosition instanceof Tile)
+			return (Tile) objectAtPosition;
 		return null;
 	}
 
@@ -32,9 +36,8 @@ public class GameImpl implements Game {
 
 	public City getCityAt(Position p) {
 		Object objectAtPosition = board[p.getRow()][p.getColumn()];
-		if(objectAtPosition instanceof City) {
+		if (objectAtPosition instanceof City)
 			return (City) objectAtPosition;
-		}
 		return null;
 	}
 
