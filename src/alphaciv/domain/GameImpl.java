@@ -15,9 +15,11 @@ package alphaciv.domain;
 public class GameImpl implements Game {
 	static int BOARDSIZE = 16; 
 	private Object[][] board = new Object[BOARDSIZE][BOARDSIZE]; 
+	private Player playerInTurn;
 	
 	public GameImpl() {
 		board[1][1] = new CityImpl(Player.RED);
+		playerInTurn = Player.RED;
 	}
 	
 	public Tile getTileAt(Position p) {
@@ -37,7 +39,7 @@ public class GameImpl implements Game {
 	}
 
 	public Player getPlayerInTurn() {
-		return null;
+		return playerInTurn;
 	}
 
 	public Player getWinner() {
