@@ -67,6 +67,8 @@ public class GameImpl implements Game {
 	public void endOfTurn() {
 		if (playerInTurn == Player.RED){
 			playerInTurn = Player.BLUE;
+		} else {
+			playerInTurn = Player.RED;
 		}
 	}
 
