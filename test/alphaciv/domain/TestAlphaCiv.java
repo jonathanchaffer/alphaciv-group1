@@ -43,6 +43,15 @@ public class TestAlphaCiv {
 		String type = t.getTypeString();
 		assertEquals("Tile at (1,0) should have type ocean", GameConstants.OCEANS, type);
 	}
+	
+	@Test
+	public void shouldHaveMountainAt2_2() {
+		Tile t = game.getTileAt(new Position(2, 2));
+		assertNotNull("There should be a tile at (2,2)", t);
+		String type = t.getTypeString();
+		assertEquals("Tile at (2,2) should have type mountain", GameConstants.MOUNTAINS, type);
+	}
+
 
 	@Test
 	public void shouldHaveCorrectInitialUnits() {
@@ -132,5 +141,12 @@ public class TestAlphaCiv {
 		assertFalse(game.moveUnit(new Position(2,0), new Position(2,1)));
 		Unit u1 = game.getUnitAt(new Position(2,1));
 		assertNull(u1);	
+	}
+	@Test
+	public void cannotMoveIntoMountainsOrOceans() {
+		assertFalse(game.moveUnit(new Position(2,0), new Position(1,0)));
+		game.endOfTurn();
+		assertFalse(game.moveUnit(new Position(3,2), new Position(2,2)));
+
 	}
 }
