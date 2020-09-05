@@ -30,12 +30,12 @@ public class TestAlphaCiv {
 		Player p = c.getOwner();
 		assertEquals("City at (1,1) should be owned by red", Player.RED, p);
 	}
-	
+
 	@Test
 	public void shouldBeRedTurnFirst() {
 		assertEquals(Player.RED, game.getPlayerInTurn());
 	}
-	
+
 	@Test
 	public void shouldHaveOceanAt1_0() {
 		Tile t = game.getTileAt(new Position(1, 0));
@@ -43,26 +43,34 @@ public class TestAlphaCiv {
 		String type = t.getTypeString();
 		assertEquals("Tile at (1,0) should have type ocean", GameConstants.OCEANS, type);
 	}
-	
+
 	@Test
 	public void shouldHaveCorrectInitialUnits() {
-		Unit u1 = game.getUnitAt(new Position(2,0));
+		Unit u1 = game.getUnitAt(new Position(2, 0));
 		assertNotNull("There should be a unit at (2,0)", u1);
 		assertEquals("There is an Archer in tile (2,0)", GameConstants.ARCHER, u1.getTypeString());
 		assertEquals("Archer should be red", Player.RED, u1.getOwner());
-		Unit u2 = game.getUnitAt(new Position(3,2));
+		Unit u2 = game.getUnitAt(new Position(3, 2));
 		assertNotNull("There should be a unit at (3,2)", u2);
 		assertEquals("There is an legion in tile (3,2)", GameConstants.LEGION, u2.getTypeString());
 		assertEquals("Legion should be blue", Player.BLUE, u2.getOwner());
-		Unit u3 = game.getUnitAt(new Position(4,3));
+		Unit u3 = game.getUnitAt(new Position(4, 3));
 		assertNotNull("There should be a unit at (4,3)", u3);
 		assertEquals("There is an settler in tile (4,3)", GameConstants.SETTLER, u3.getTypeString());
 		assertEquals("Settler should be red", Player.RED, u3.getOwner());
 	}
+
 	@Test
 	public void shouldTurnOverToBlueWhenEndOfTurnIsCalled() {
 		game.endOfTurn();
 		assertEquals(Player.BLUE, game.getPlayerInTurn());
+	}
+
+	@Test
+	public void shouldTurnOverToRedWhenRoundEnds() {
+		game.endOfTurn();
+		game.endOfTurn();
+		assertEquals(Player.RED, game.getPlayerInTurn());
 	}
 //	@Test
 //	public void unitsCanMove() {
