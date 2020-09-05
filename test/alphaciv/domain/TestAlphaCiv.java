@@ -72,6 +72,12 @@ public class TestAlphaCiv {
 		game.endOfTurn();
 		assertEquals(Player.RED, game.getPlayerInTurn());
 	}
+	
+	@Test
+	public void shouldStartGameAt4000BC() {
+		assertEquals(-4000, game.getAge());
+	}
+	
 //	@Test
 //	public void unitsCanMove() {
 //		Unit u = game.
