@@ -28,21 +28,21 @@ public class GameImpl implements Game {
 	}
 
 	public Tile getTileAt(Position p) {
-		Object objectAtPosition = board[p.getRow()][p.getColumn()];
+		Object objectAtPosition = getObjectAtPosition(p);
 		if (objectAtPosition instanceof Tile)
 			return (Tile) objectAtPosition;
 		return null;
 	}
 
 	public Unit getUnitAt(Position p) {
-		Object objectAtPosition = board[p.getRow()][p.getColumn()];
+		Object objectAtPosition = getObjectAtPosition(p);
 		if (objectAtPosition instanceof Unit)
 			return (Unit) objectAtPosition;
 		return null;
 	}
 
 	public City getCityAt(Position p) {
-		Object objectAtPosition = board[p.getRow()][p.getColumn()];
+		Object objectAtPosition = getObjectAtPosition(p);
 		if (objectAtPosition instanceof City)
 			return (City) objectAtPosition;
 		return null;
@@ -62,6 +62,14 @@ public class GameImpl implements Game {
 	}
 
 	public boolean moveUnit(Position from, Position to) {
+		Object objectAtFromPosition = getObjectAtPosition(from);
+		if (objectAtFromPosition instanceof Unit) {
+			if (Math.abs(to.getRow() - from.getRow()) <= 1 && Math.abs(to.getColumn() - from.getColumn()) <= 1) {
+				board[to.getRow()][to.getColumn()] = objectAtFromPosition;
+				board[from.getRow()][from.getColumn()] = null;
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -81,5 +89,9 @@ public class GameImpl implements Game {
 	}
 
 	public void performUnitActionAt(Position p) {
+	}
+	
+	private Object getObjectAtPosition(Position p) {
+		return board[p.getRow()][p.getColumn()];
 	}
 }
