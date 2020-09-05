@@ -152,11 +152,11 @@ public class TestAlphaCiv {
 	
 	@Test
 	public void shouldHaveCorrectInitialCities() {
-		City c1 = game.getCityAt(1,1);
+		City c1 = game.getCityAt(new Position(1,1));
 		assertNotNull(c1);
 		assertEquals(Player.RED, c1.getOwner());
 		
-		City c2 = game.getCityAt(4,1);
+		City c2 = game.getCityAt(new Position(4,1));
 		assertNotNull(c2); 
 		assertEquals(Player.BLUE, c2.getOwner()); 
 	}
