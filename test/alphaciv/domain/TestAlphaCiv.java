@@ -88,6 +88,14 @@ public class TestAlphaCiv {
 		assertEquals(GameConstants.STARTAGE + 2 * GameConstants.YEARSPERROUND, game.getAge());
 	}
 	
+	@Test
+	public void redShouldWinAt3000BC() {
+		for (int i = 0; i < 20; i++) {
+			game.endOfTurn();
+		}
+		assertEquals(Player.RED, game.getWinner());
+	}
+	
 //	@Test
 //	public void unitsCanMove() {
 //		Unit u = game.
