@@ -96,6 +96,30 @@ public class TestAlphaCiv {
 		assertEquals(Player.RED, game.getWinner());
 	}
 	
+	@Test
+	public void testValidMoves() {
+		game.moveUnit(new Position(2,0), new Position(2,1));
+		Unit u1 = game.getUnitAt(new Position(2,1));
+		assertNotNull(u1);
+		assertEquals(GameConstants.ARCHER, u1.getTypeString());
+		assertEquals(Player.RED, u1.getOwner());
+		assertNull(game.getUnitAt(new Position(2,0)));
+
+		game.moveUnit(new Position(3,2), new Position(4,1));
+		Unit u2 = game.getUnitAt(new Position(4,1));
+		assertNotNull(u2);
+		assertEquals(GameConstants.LEGION, u2.getTypeString());
+		assertEquals(Player.BLUE, u2.getOwner());
+		assertNull(game.getUnitAt(new Position(3,2)));
+		
+		game.moveUnit(new Position(4,3), new Position(5,3));
+		Unit u3 = game.getUnitAt(new Position(5,3));
+		assertNotNull(u3);
+		assertEquals(GameConstants.SETTLER, u3.getTypeString());
+		assertEquals(Player.RED, u3.getOwner());
+		assertNull(game.getUnitAt(new Position(4,3)));
+	}
+	
 //	@Test
 //	public void unitsCanMove() {
 //		Unit u = game.
