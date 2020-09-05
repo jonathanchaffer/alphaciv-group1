@@ -20,6 +20,7 @@ public class GameImpl implements Game {
 	public GameImpl() {
 		board[1][1] = new CityImpl(Player.RED);
 		board[1][0] = new TileImpl(GameConstants.OCEANS);
+		board[2][2] = new TileImpl(GameConstants.MOUNTAINS);
 		playerInTurn = Player.RED;
 		board[2][0] = new UnitImpl(GameConstants.ARCHER, Player.RED);
 		board[3][2] = new UnitImpl(GameConstants.LEGION, Player.BLUE);
@@ -63,6 +64,13 @@ public class GameImpl implements Game {
 
 	public boolean moveUnit(Position from, Position to) {
 		Object objectAtFromPosition = getObjectAtPosition(from);
+		Object objectAtToPosition = getObjectAtPosition(to); 
+		if (objectAtToPosition instanceof Tile) {
+			Tile tileAtToPosition = (Tile)objectAtToPosition;
+			if(tileAtToPosition.getTypeString().equals(GameConstants.OCEANS) || tileAtToPosition.getTypeString().equals(GameConstants.MOUNTAINS)) {
+				return false; 
+			}
+		}
 		if (objectAtFromPosition instanceof Unit) {
 			Unit unitAtFromPosition = (Unit)objectAtFromPosition; 
 			if(unitAtFromPosition.getOwner() != playerInTurn){
