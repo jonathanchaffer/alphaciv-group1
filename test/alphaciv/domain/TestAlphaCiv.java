@@ -104,6 +104,7 @@ public class TestAlphaCiv {
 		assertEquals(GameConstants.ARCHER, u1.getTypeString());
 		assertEquals(Player.RED, u1.getOwner());
 		assertNull(game.getUnitAt(new Position(2,0)));
+		game.endOfTurn();
 
 		assertTrue(game.moveUnit(new Position(3,2), new Position(4,1)));
 		Unit u2 = game.getUnitAt(new Position(4,1));
@@ -111,6 +112,7 @@ public class TestAlphaCiv {
 		assertEquals(GameConstants.LEGION, u2.getTypeString());
 		assertEquals(Player.BLUE, u2.getOwner());
 		assertNull(game.getUnitAt(new Position(3,2)));
+		game.endOfTurn();
 		
 		assertTrue(game.moveUnit(new Position(4,3), new Position(5,3)));
 		Unit u3 = game.getUnitAt(new Position(5,3));
@@ -118,6 +120,7 @@ public class TestAlphaCiv {
 		assertEquals(GameConstants.SETTLER, u3.getTypeString());
 		assertEquals(Player.RED, u3.getOwner());
 		assertNull(game.getUnitAt(new Position(4,3)));
+		game.endOfTurn();
 	}
 	
 	@Test

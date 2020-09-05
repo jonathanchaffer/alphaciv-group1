@@ -64,6 +64,10 @@ public class GameImpl implements Game {
 	public boolean moveUnit(Position from, Position to) {
 		Object objectAtFromPosition = getObjectAtPosition(from);
 		if (objectAtFromPosition instanceof Unit) {
+			Unit unitAtFromPosition = (Unit)objectAtFromPosition; 
+			if(unitAtFromPosition.getOwner() != playerInTurn){
+				return false; 
+			}
 			if (Math.abs(to.getRow() - from.getRow()) <= 1 && Math.abs(to.getColumn() - from.getColumn()) <= 1) {
 				board[to.getRow()][to.getColumn()] = objectAtFromPosition;
 				board[from.getRow()][from.getColumn()] = null;
