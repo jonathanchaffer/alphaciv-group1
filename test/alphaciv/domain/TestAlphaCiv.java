@@ -149,4 +149,15 @@ public class TestAlphaCiv {
 		assertFalse(game.moveUnit(new Position(3,2), new Position(2,2)));
 
 	}
+	
+	@Test
+	public void shouldHaveCorrectInitialCities() {
+		City c1 = game.getCityAt(1,1);
+		assertNotNull(c1);
+		assertEquals(Player.RED, c1.getOwner());
+		
+		City c2 = game.getCityAt(4,1);
+		assertNotNull(c2); 
+		assertEquals(Player.BLUE, c2.getOwner()); 
+	}
 }
