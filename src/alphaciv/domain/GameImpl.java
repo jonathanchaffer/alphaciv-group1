@@ -65,6 +65,9 @@ public class GameImpl implements Game {
 	}
 
 	public void endOfTurn() {
+		if (playerInTurn == Player.RED){
+			playerInTurn = Player.BLUE;
+		}
 	}
 
 	public void changeWorkForceFocusInCityAt(Position p, String balance) {
