@@ -22,6 +22,7 @@ public class GameImpl implements Game {
 		board[4][1] = new CityImpl(Player.BLUE);
 		board[1][0] = new TileImpl(GameConstants.OCEANS);
 		board[2][2] = new TileImpl(GameConstants.MOUNTAINS);
+		board[0][1] = new TileImpl(GameConstants.HILLS);
 		playerInTurn = Player.RED;
 		board[2][0] = new UnitImpl(GameConstants.ARCHER, Player.RED);
 		board[3][2] = new UnitImpl(GameConstants.LEGION, Player.BLUE);
