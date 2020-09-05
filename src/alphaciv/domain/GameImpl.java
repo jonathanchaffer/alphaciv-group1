@@ -53,6 +53,7 @@ public class GameImpl implements Game {
 	}
 
 	public Player getWinner() {
+		if (age == -3000) return Player.RED;
 		return null;
 	}
 
