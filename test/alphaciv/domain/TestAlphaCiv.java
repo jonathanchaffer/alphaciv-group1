@@ -59,7 +59,11 @@ public class TestAlphaCiv {
 		assertEquals("There is an settler in tile (4,3)", GameConstants.SETTLER, u3.getTypeString());
 		assertEquals("Settler should be red", Player.RED, u3.getOwner());
 	}
-	
+	@Test
+	public void shouldTurnOverToBlueWhenEndOfTurnIsCalled() {
+		game.endOfTurn();
+		assertEquals(Player.BLUE, game.getPlayerInTurn());
+	}
 //	@Test
 //	public void unitsCanMove() {
 //		Unit u = game.
