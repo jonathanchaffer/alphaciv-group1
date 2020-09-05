@@ -21,6 +21,10 @@ public class GameImpl implements Game {
 		board[1][1] = new CityImpl(Player.RED);
 		board[1][0] = new TileImpl(GameConstants.OCEANS);
 		playerInTurn = Player.RED;
+		board[2][0] = new UnitImpl(GameConstants.ARCHER, Player.RED);
+		board[3][2] = new UnitImpl(GameConstants.LEGION, Player.BLUE);
+		board[4][3] = new UnitImpl(GameConstants.SETTLER, Player.RED);
+
 	}
 
 	public Tile getTileAt(Position p) {
@@ -31,6 +35,9 @@ public class GameImpl implements Game {
 	}
 
 	public Unit getUnitAt(Position p) {
+		Object objectAtPosition = board[p.getRow()][p.getColumn()];
+		if (objectAtPosition instanceof Unit)
+			return (Unit) objectAtPosition;
 		return null;
 	}
 
