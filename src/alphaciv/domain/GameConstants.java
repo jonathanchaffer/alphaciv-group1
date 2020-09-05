@@ -22,6 +22,10 @@ package alphaciv.domain;
 public class GameConstants {
   // The size of the world is set permanently to a 16x16 grid 
   public static final int WORLDSIZE = 16;
+  // The age at the start of the game
+  public static final int STARTAGE = -4000;
+  // The number of years per round
+  public static final int YEARSPERROUND = 100;
   // Valid unit types
   public static final String ARCHER    = "archer";
   public static final String LEGION    = "legion";

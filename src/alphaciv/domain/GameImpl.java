@@ -13,9 +13,9 @@ package alphaciv.domain;
  */
 
 public class GameImpl implements Game {
-	static int BOARDSIZE = 16;
-	private Object[][] board = new Object[BOARDSIZE][BOARDSIZE];
+	private Object[][] board = new Object[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
 	private Player playerInTurn;
+	private int age = GameConstants.STARTAGE;
 
 	public GameImpl() {
 		board[1][1] = new CityImpl(Player.RED);
@@ -57,7 +57,7 @@ public class GameImpl implements Game {
 	}
 
 	public int getAge() {
-		return 0;
+		return age;
 	}
 
 	public boolean moveUnit(Position from, Position to) {
