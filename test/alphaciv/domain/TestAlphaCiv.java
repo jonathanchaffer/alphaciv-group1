@@ -122,15 +122,12 @@ public class TestAlphaCiv {
 	
 	@Test
 	public void canOnlyMoveUnitsWhenItsOwnersTurn() {
-		assertTrue(game.moveUnit(new Position(2,0), new Position(2,1)));
-		Unit u1 = game.getUnitAt(new Position(2,1));
-		assertNotNull(u1);
-		assertEquals(GameConstants.ARCHER, u1.getTypeString());
-		assertEquals(Player.RED, u1.getOwner());
-		assertNull(game.getUnitAt(new Position(2,0)));
-		
 		assertFalse(game.moveUnit(new Position(3,2), new Position(4,1)));
 		Unit u2 = game.getUnitAt(new Position(4,1));
 		assertNull(u2);
+		game.endOfTurn();
+		assertFalse(game.moveUnit(new Position(2,0), new Position(2,1)));
+		Unit u1 = game.getUnitAt(new Position(2,1));
+		assertNull(u1);	
 	}
 }
