@@ -69,6 +69,7 @@ public class GameImpl implements Game {
 			playerInTurn = Player.BLUE;
 		} else {
 			playerInTurn = Player.RED;
+			age += GameConstants.YEARSPERROUND;
 		}
 	}
 
