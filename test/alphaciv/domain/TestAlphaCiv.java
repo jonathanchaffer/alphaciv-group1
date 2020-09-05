@@ -75,7 +75,17 @@ public class TestAlphaCiv {
 	
 	@Test
 	public void shouldStartGameAt4000BC() {
-		assertEquals(-4000, game.getAge());
+		assertEquals(GameConstants.STARTAGE, game.getAge());
+	}
+	
+	@Test
+	public void shouldAge100YearsAfterRound() {
+		game.endOfTurn();
+		game.endOfTurn();
+		assertEquals(GameConstants.STARTAGE + GameConstants.YEARSPERROUND, game.getAge());
+		game.endOfTurn();
+		game.endOfTurn();
+		assertEquals(GameConstants.STARTAGE + 2 * GameConstants.YEARSPERROUND, game.getAge());
 	}
 	
 //	@Test
