@@ -13,6 +13,7 @@ package alphaciv.domain;
  */
 
 public class GameImpl implements Game {
+	// TODO: refactor to have separate 2d arrays for each object type
 	private Object[][] board = new Object[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
 	private Player playerInTurn;
 	private int age = GameConstants.STARTAGE;
@@ -32,6 +33,7 @@ public class GameImpl implements Game {
 
 	public Tile getTileAt(Position p) {
 		Object objectAtPosition = getObjectAtPosition(p);
+		// TODO: code smell - using reflection
 		if (objectAtPosition instanceof Tile)
 			return (Tile) objectAtPosition;
 		return null;
@@ -39,6 +41,7 @@ public class GameImpl implements Game {
 
 	public Unit getUnitAt(Position p) {
 		Object objectAtPosition = getObjectAtPosition(p);
+		// TODO: code smell - using reflection
 		if (objectAtPosition instanceof Unit)
 			return (Unit) objectAtPosition;
 		return null;
@@ -46,6 +49,7 @@ public class GameImpl implements Game {
 
 	public City getCityAt(Position p) {
 		Object objectAtPosition = getObjectAtPosition(p);
+		// TODO: code smell - using reflection
 		if (objectAtPosition instanceof City)
 			return (City) objectAtPosition;
 		return null;
@@ -56,7 +60,8 @@ public class GameImpl implements Game {
 	}
 
 	public Player getWinner() {
-		if (age == -3000) return Player.RED;
+		if (age == -3000)
+			return Player.RED;
 		return null;
 	}
 
@@ -66,17 +71,18 @@ public class GameImpl implements Game {
 
 	public boolean moveUnit(Position from, Position to) {
 		Object objectAtFromPosition = getObjectAtPosition(from);
-		Object objectAtToPosition = getObjectAtPosition(to); 
+		Object objectAtToPosition = getObjectAtPosition(to);
 		if (objectAtToPosition instanceof Tile) {
-			Tile tileAtToPosition = (Tile)objectAtToPosition;
-			if(tileAtToPosition.getTypeString().equals(GameConstants.OCEANS) || tileAtToPosition.getTypeString().equals(GameConstants.MOUNTAINS)) {
-				return false; 
+			Tile tileAtToPosition = (Tile) objectAtToPosition;
+			if (tileAtToPosition.getTypeString().equals(GameConstants.OCEANS)
+					|| tileAtToPosition.getTypeString().equals(GameConstants.MOUNTAINS)) {
+				return false;
 			}
 		}
 		if (objectAtFromPosition instanceof Unit) {
-			Unit unitAtFromPosition = (Unit)objectAtFromPosition; 
-			if(unitAtFromPosition.getOwner() != playerInTurn){
-				return false; 
+			Unit unitAtFromPosition = (Unit) objectAtFromPosition;
+			if (unitAtFromPosition.getOwner() != playerInTurn) {
+				return false;
 			}
 			if (Math.abs(to.getRow() - from.getRow()) <= 1 && Math.abs(to.getColumn() - from.getColumn()) <= 1) {
 				board[to.getRow()][to.getColumn()] = objectAtFromPosition;
@@ -88,7 +94,7 @@ public class GameImpl implements Game {
 	}
 
 	public void endOfTurn() {
-		if (playerInTurn == Player.RED){
+		if (playerInTurn == Player.RED) {
 			playerInTurn = Player.BLUE;
 		} else {
 			playerInTurn = Player.RED;
@@ -104,7 +110,7 @@ public class GameImpl implements Game {
 
 	public void performUnitActionAt(Position p) {
 	}
-	
+
 	private Object getObjectAtPosition(Position p) {
 		return board[p.getRow()][p.getColumn()];
 	}
