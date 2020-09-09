@@ -36,7 +36,7 @@ public class GameImpl implements Game {
 		// TODO: code smell - using reflection
 		if (objectAtPosition instanceof Tile)
 			return (Tile) objectAtPosition;
-		return null;
+		return new TileImpl(GameConstants.PLAINS);
 	}
 
 	public Unit getUnitAt(Position p) {
