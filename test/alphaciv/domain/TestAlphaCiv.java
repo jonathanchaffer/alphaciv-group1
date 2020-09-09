@@ -182,4 +182,14 @@ public class TestAlphaCiv {
 		assertNotNull(c2);
 		assertEquals(Player.BLUE, c2.getOwner());
 	}
+
+	@Test
+	public void attackWorks() {
+		game.moveUnit(new Position(4, 3), new Position(3, 2));
+		assertNull(game.getUnitAt(new Position(4, 3)));
+		Unit newUnit = game.getUnitAt(new Position(3, 2));
+		assertNotNull(newUnit);
+		assertEquals(Player.RED, newUnit.getOwner());
+		assertEquals(GameConstants.SETTLER, newUnit.getTypeString());
+	}
 }
