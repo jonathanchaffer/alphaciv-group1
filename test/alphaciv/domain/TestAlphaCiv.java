@@ -192,4 +192,10 @@ public class TestAlphaCiv {
 		assertEquals(Player.RED, newUnit.getOwner());
 		assertEquals(GameConstants.SETTLER, newUnit.getTypeString());
 	}
+	@Test 
+	public void cityProductionIsArcherByDefault() {
+		City c1 = game.getCityAt(new Position(1,1));
+		assertNotNull(c1);
+		assertEquals(GameConstants.ARCHER,c1.getProduction());
+	}
 }
