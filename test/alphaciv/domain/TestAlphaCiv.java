@@ -51,6 +51,13 @@ public class TestAlphaCiv {
 	}
 
 	@Test
+	public void shouldHavePlainAt15_15() {
+		Tile t = game.getTileAt(new Position(15, 15));
+		assertNotNull(t);
+		assertEquals(GameConstants.PLAINS, t.getTypeString());
+	}
+
+	@Test
 	public void shouldHaveMountainAt2_2() {
 		Tile t = game.getTileAt(new Position(2, 2));
 		assertNotNull("There should be a tile at (2,2)", t);
