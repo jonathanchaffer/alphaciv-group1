@@ -1,7 +1,13 @@
 package alphaciv.domain;
 
-import org.junit.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Skeleton class for AlphaCiv test cases
@@ -107,10 +113,10 @@ public class TestAlphaCiv {
 	@Test
 	public void redShouldWinAt3000BC() {
 		for (int i = 0; i < 20; i++) {
-			// TODO: assert that red hasn't won yet, or write another test case
+			assertNull(game.getWinner());
 			game.endOfTurn();
 		}
-		// TODO: assert that year is -3000
+		assertEquals(-3000, game.getAge());
 		assertEquals(Player.RED, game.getWinner());
 	}
 
@@ -157,7 +163,6 @@ public class TestAlphaCiv {
 		assertFalse(game.moveUnit(new Position(2, 0), new Position(1, 0)));
 		game.endOfTurn();
 		assertFalse(game.moveUnit(new Position(3, 2), new Position(2, 2)));
-
 	}
 
 	@Test
