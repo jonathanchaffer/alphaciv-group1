@@ -13,46 +13,40 @@ package alphaciv.domain;
  */
 
 public class GameImpl implements Game {
-	// TODO: refactor to have separate 2d arrays for each object type
-	private Object[][] board = new Object[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
+	private Tile[][] tiles = new Tile[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
+	private Unit[][] units = new Unit[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
+	private City[][] cities = new City[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
+
 	private Player playerInTurn;
 	private int age = GameConstants.STARTAGE;
 
 	public GameImpl() {
-		board[1][1] = new CityImpl(Player.RED);
-		board[4][1] = new CityImpl(Player.BLUE);
-		board[1][0] = new TileImpl(GameConstants.OCEANS);
-		board[2][2] = new TileImpl(GameConstants.MOUNTAINS);
-		board[0][1] = new TileImpl(GameConstants.HILLS);
 		playerInTurn = Player.RED;
-		board[2][0] = new UnitImpl(GameConstants.ARCHER, Player.RED);
-		board[3][2] = new UnitImpl(GameConstants.LEGION, Player.BLUE);
-		board[4][3] = new UnitImpl(GameConstants.SETTLER, Player.RED);
 
+		cities[1][1] = new CityImpl(Player.RED);
+		cities[4][1] = new CityImpl(Player.BLUE);
+		tiles[1][0] = new TileImpl(GameConstants.OCEANS);
+		tiles[2][2] = new TileImpl(GameConstants.MOUNTAINS);
+		tiles[0][1] = new TileImpl(GameConstants.HILLS);
+		units[2][0] = new UnitImpl(GameConstants.ARCHER, Player.RED);
+		units[3][2] = new UnitImpl(GameConstants.LEGION, Player.BLUE);
+		units[4][3] = new UnitImpl(GameConstants.SETTLER, Player.RED);
 	}
 
 	public Tile getTileAt(Position p) {
-		Object objectAtPosition = getObjectAtPosition(p);
-		// TODO: code smell - using reflection
-		if (objectAtPosition instanceof Tile)
-			return (Tile) objectAtPosition;
-		return new TileImpl(GameConstants.PLAINS);
+		Tile tile = tiles[p.getRow()][p.getColumn()];
+		if (tile != null)
+			return tile;
+		else
+			return new TileImpl(GameConstants.PLAINS);
 	}
 
 	public Unit getUnitAt(Position p) {
-		Object objectAtPosition = getObjectAtPosition(p);
-		// TODO: code smell - using reflection
-		if (objectAtPosition instanceof Unit)
-			return (Unit) objectAtPosition;
-		return null;
+		return units[p.getRow()][p.getColumn()];
 	}
 
 	public City getCityAt(Position p) {
-		Object objectAtPosition = getObjectAtPosition(p);
-		// TODO: code smell - using reflection
-		if (objectAtPosition instanceof City)
-			return (City) objectAtPosition;
-		return null;
+		return cities[p.getRow()][p.getColumn()];
 	}
 
 	public Player getPlayerInTurn() {
@@ -70,25 +64,17 @@ public class GameImpl implements Game {
 	}
 
 	public boolean moveUnit(Position from, Position to) {
-		Object objectAtFromPosition = getObjectAtPosition(from);
-		Object objectAtToPosition = getObjectAtPosition(to);
-		if (objectAtToPosition instanceof Tile) {
-			Tile tileAtToPosition = (Tile) objectAtToPosition;
-			if (tileAtToPosition.getTypeString().equals(GameConstants.OCEANS)
-					|| tileAtToPosition.getTypeString().equals(GameConstants.MOUNTAINS)) {
-				return false;
-			}
-		}
-		if (objectAtFromPosition instanceof Unit) {
-			Unit unitAtFromPosition = (Unit) objectAtFromPosition;
-			if (unitAtFromPosition.getOwner() != playerInTurn) {
-				return false;
-			}
-			if (Math.abs(to.getRow() - from.getRow()) <= 1 && Math.abs(to.getColumn() - from.getColumn()) <= 1) {
-				board[to.getRow()][to.getColumn()] = objectAtFromPosition;
-				board[from.getRow()][from.getColumn()] = null;
-				return true;
-			}
+		Unit unitAtFromPosition = getUnitAt(from);
+		Tile tileAtToPosition = getTileAt(to);
+		if (tileAtToPosition.getTypeString().equals(GameConstants.OCEANS)
+				|| tileAtToPosition.getTypeString().equals(GameConstants.MOUNTAINS))
+			return false;
+		if (unitAtFromPosition.getOwner() != playerInTurn)
+			return false;
+		if (Math.abs(to.getRow() - from.getRow()) <= 1 && Math.abs(to.getColumn() - from.getColumn()) <= 1) {
+			units[to.getRow()][to.getColumn()] = unitAtFromPosition;
+			units[from.getRow()][from.getColumn()] = null;
+			return true;
 		}
 		return false;
 	}
@@ -109,9 +95,5 @@ public class GameImpl implements Game {
 	}
 
 	public void performUnitActionAt(Position p) {
-	}
-
-	private Object getObjectAtPosition(Position p) {
-		return board[p.getRow()][p.getColumn()];
 	}
 }
