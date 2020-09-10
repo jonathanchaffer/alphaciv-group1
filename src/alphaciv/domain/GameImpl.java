@@ -107,37 +107,42 @@ public class GameImpl implements Game {
 			for (int j = 0; j < cities[i].length; j++) {
 				CityImpl c = (CityImpl) cities[i][j];
 				if (c != null) {
-						tryToPlaceUnitsAtPosition(new Position(i, j), c); 
-						tryToPlaceUnitsAtPosition(new Position(i-1, j), c); 
-						tryToPlaceUnitsAtPosition(new Position(i-1, j+1), c); 
-						tryToPlaceUnitsAtPosition(new Position(i, j+1), c); 
-						tryToPlaceUnitsAtPosition(new Position(i+1, j+1), c); 
-						tryToPlaceUnitsAtPosition(new Position(i+1, j), c); 
-						tryToPlaceUnitsAtPosition(new Position(i+1, j-1), c); 
-						tryToPlaceUnitsAtPosition(new Position(i, j-1), c); 
-						tryToPlaceUnitsAtPosition(new Position(i-1, j-1), c); 
+					tryToPlaceUnitsAtPosition(new Position(i, j), c);
+					tryToPlaceUnitsAtPosition(new Position(i - 1, j), c);
+					tryToPlaceUnitsAtPosition(new Position(i - 1, j + 1), c);
+					tryToPlaceUnitsAtPosition(new Position(i, j + 1), c);
+					tryToPlaceUnitsAtPosition(new Position(i + 1, j + 1), c);
+					tryToPlaceUnitsAtPosition(new Position(i + 1, j), c);
+					tryToPlaceUnitsAtPosition(new Position(i + 1, j - 1), c);
+					tryToPlaceUnitsAtPosition(new Position(i, j - 1), c);
+					tryToPlaceUnitsAtPosition(new Position(i - 1, j - 1), c);
 				}
 			}
 		}
 	}
-	
+
 	private void tryToPlaceUnitsAtPosition(Position position, CityImpl c) {
-		if(getUnitAt(position) != null) {
-			return;  
+		if (getUnitAt(position) != null) {
+			return;
 		}
-		if(getTileAt(position).getTypeString().equals(GameConstants.MOUNTAINS) || getTileAt(position).getTypeString().equals(GameConstants.OCEANS)) {
-			return; 
+		if (getTileAt(position).getTypeString().equals(GameConstants.MOUNTAINS)
+				|| getTileAt(position).getTypeString().equals(GameConstants.OCEANS)) {
+			return;
 		}
 		if (!c.canProduceUnit()) {
 			return;
 		}
 		units[position.getRow()][position.getColumn()] = new UnitImpl(c.getProduction(), c.getOwner());
 	}
-	
+
 	public void changeWorkForceFocusInCityAt(Position p, String balance) {
 	}
 
 	public void changeProductionInCityAt(Position p, String unitType) {
+		CityImpl c = (CityImpl) getCityAt(p);
+		if (c != null) {
+			c.setProductionType(unitType);
+		}
 	}
 
 	public void performUnitActionAt(Position p) {
