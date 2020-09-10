@@ -90,6 +90,18 @@ public class TestAlphaCiv {
 	}
 
 	@Test
+	public void shouldNotHaveUnitAt15_15() {
+		Unit u = game.getUnitAt(new Position(15, 15));
+		assertNull(u);
+	}
+
+	@Test
+	public void shouldNotHaveCityAt15_15() {
+		City c = game.getCityAt(new Position(15, 15));
+		assertNull(c);
+	}
+
+	@Test
 	public void shouldTurnOverToBlueWhenEndOfTurnIsCalled() {
 		game.endOfTurn();
 		assertEquals(Player.BLUE, game.getPlayerInTurn());
