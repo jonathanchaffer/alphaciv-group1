@@ -1,9 +1,0 @@
-Iterations made:
-	1. Reorganized project tree into packages. Added src directory that contains production code, and a test directory that contains test code.
-	2. Created build.xml file with help target. Ran ant in terminal to make sure that it works.
-	3. Added prepare and build-src targets.
-	4. Added build-test and build-all targets.
-	5. Added test and clean targets.
-	6. Added javadoc target, and updated gitignore to ignore the generated javadoc directory.
-
-The main benefit of this process is that it allows us to standardize the build process used for both production and test code. By using the rhythm and doing small refactors along the way it's easy to keep the build environment organized and logical. A potential drawback is that it makes the process of creating a build environment a bit tedious, but this is worth it in the long run because of the massive benefits of having a well-made build environment.
