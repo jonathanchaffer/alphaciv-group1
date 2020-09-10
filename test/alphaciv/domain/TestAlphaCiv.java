@@ -198,4 +198,17 @@ public class TestAlphaCiv {
 		assertNotNull(c1);
 		assertEquals(GameConstants.ARCHER,c1.getProduction());
 	}
+////	@Test
+////	public void produceSixArchersAtEndOfRound() {
+////		game.endOfTurn();
+////		game.endOfTurn();
+////		
+//			
+//	}
+	@Test 
+	public void populationOfCityShouldBe1() {
+		City c1 = game.getCityAt(new Position(1,1));
+		assertNotNull(c1);
+		assertEquals(1,c1.getSize());
+	}
 }
