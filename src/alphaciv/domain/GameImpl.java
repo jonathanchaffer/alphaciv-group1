@@ -85,6 +85,33 @@ public class GameImpl implements Game {
 		} else {
 			playerInTurn = Player.RED;
 			age += GameConstants.YEARSPERROUND;
+			gatherAllCitiesResources();
+			produceAllCitiesUnits();
+		}
+	}
+
+	private void gatherAllCitiesResources() {
+		for (int i = 0; i < cities.length; i++) {
+			for (int j = 0; j < cities[i].length; j++) {
+				CityImpl c = (CityImpl) cities[i][j];
+				if (c != null) {
+					c.addResources(6);
+				}
+			}
+		}
+
+	}
+
+	private void produceAllCitiesUnits() {
+		for (int i = 0; i < cities.length; i++) {
+			for (int j = 0; j < cities[i].length; j++) {
+				CityImpl c = (CityImpl) cities[i][j];
+				if (c != null) {
+					if (c.canProduceUnit()) {
+						units[i][j] = new UnitImpl(c.getProduction(), c.getOwner());
+					}
+				}
+			}
 		}
 	}
 

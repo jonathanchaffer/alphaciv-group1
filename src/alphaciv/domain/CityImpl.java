@@ -4,6 +4,7 @@ public class CityImpl implements City {
 	Player owner; 
 	String productionType;
 	int populationSize;
+	int resources;
 	
 	public CityImpl(Player player) {
 		owner = player; 
@@ -20,6 +21,7 @@ public class CityImpl implements City {
 		return populationSize;
 	}
 
+
 	@Override
 	public String getProduction() {
 		return productionType;
@@ -29,6 +31,15 @@ public class CityImpl implements City {
 	public String getWorkforceFocus() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public boolean canProduceUnit() {
+		if(GameConstants.getCostForUnit(productionType) <= resources) {
+			return true;
+		}
+		return false;
+	}
+	public void addResources(int amount) {
+		resources += amount;
 	}
 
 }

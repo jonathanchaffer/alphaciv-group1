@@ -199,7 +199,7 @@ public class TestAlphaCiv {
 		assertEquals(GameConstants.ARCHER,c1.getProduction());
 	}
 	@Test
-	public void producesArcherAtEndOfRound() {
+	public void producesArcherAtEndOfTwoRound() {
 		City c1 = game.getCityAt(new Position(1,1));
 		assertNotNull(c1);
 		game.endOfTurn();
@@ -207,7 +207,9 @@ public class TestAlphaCiv {
 		game.endOfTurn();
 		game.endOfTurn();
 	    Unit newUnit = game.getUnitAt(new Position(1,1));
+	    assertNotNull(newUnit);
 	    assertEquals(GameConstants.ARCHER, newUnit.getTypeString());
+	    assertEquals(Player.RED, newUnit.getOwner());
 	}
 	@Test 
 	public void populationOfCityShouldBe1() {

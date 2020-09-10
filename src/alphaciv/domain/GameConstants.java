@@ -39,4 +39,13 @@ public class GameConstants {
   // Valid production balance types
   public static final String productionFocus = "hammer";
   public static final String foodFocus = "apple";
+  
+  public static final int getCostForUnit(String unitType) {
+	  switch(unitType) {
+	  case ARCHER: return 10;
+	  case LEGION: return 15;
+	  case SETTLER: return 30;
+	  default: return-1;
+	  }
+  }
 }
