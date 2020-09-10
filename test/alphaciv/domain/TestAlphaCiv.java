@@ -218,31 +218,32 @@ public class TestAlphaCiv {
 	public void placesUnitsAroundCity() {
 		City c1 = game.getCityAt(new Position(1, 1));
 		assertNotNull(c1);
-		for (int i = 0; i < 8; i++) {
-			game.endOfTurn();
-		}
+
+		playRounds(4);
 		Unit u1 = game.getUnitAt(new Position(0, 1));
 		assertNotNull(u1);
 		assertEquals(GameConstants.ARCHER, u1.getTypeString());
-		game.endOfTurn();
-		game.endOfTurn();
+		assertNull(game.getUnitAt(new Position(0, 2)));
+
+		playRounds(1);
 		Unit u2 = game.getUnitAt(new Position(0, 2));
 		assertNotNull(u2);
 		assertEquals(GameConstants.ARCHER, u2.getTypeString());
-		for (int i = 0; i < 4; i++) {
-			game.endOfTurn();
-		}
+		assertNull(game.getUnitAt(new Position(1, 2)));
+
+		playRounds(2);
 		Unit u3 = game.getUnitAt(new Position(1, 2));
 		assertNotNull(u3);
 		assertEquals(GameConstants.ARCHER, u3.getTypeString());
-		for (int i = 0; i < 4; i++) {
-			game.endOfTurn();
-		}
+		assertNull(game.getUnitAt(new Position(2, 1)));
+
+		playRounds(2);
 		Unit u4 = game.getUnitAt(new Position(2, 1));
 		assertNotNull(u4);
 		assertEquals(GameConstants.ARCHER, u4.getTypeString());
-		game.endOfTurn();
-		game.endOfTurn();
+		assertNull(game.getUnitAt(new Position(0, 0)));
+
+		playRounds(1);
 		Unit u5 = game.getUnitAt(new Position(0, 0));
 		assertNotNull(u5);
 		assertEquals(GameConstants.ARCHER, u5.getTypeString());
@@ -273,6 +274,12 @@ public class TestAlphaCiv {
 		assertEquals(GameConstants.ARCHER, c1.getProduction());
 		game.changeProductionInCityAt(new Position(4, 1), GameConstants.SETTLER);
 		assertEquals(GameConstants.ARCHER, c1.getProduction());
+	}
+
+	private void playRounds(int rounds) {
+		for (int i = 0; i < rounds * 2; i++) {
+			game.endOfTurn();
+		}
 	}
 
 }
