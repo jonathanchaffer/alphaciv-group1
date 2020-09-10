@@ -95,7 +95,7 @@ public class GameImpl implements Game {
 			for (int j = 0; j < cities[i].length; j++) {
 				CityImpl c = (CityImpl) cities[i][j];
 				if (c != null) {
-					c.addResources(6);
+					c.addResources(GameConstants.PRODPERROUND);
 				}
 			}
 		}
