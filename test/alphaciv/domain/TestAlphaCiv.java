@@ -109,8 +109,7 @@ public class TestAlphaCiv {
 
 	@Test
 	public void shouldTurnOverToRedWhenRoundEnds() {
-		game.endOfTurn();
-		game.endOfTurn();
+		playRounds(1);
 		assertEquals(Player.RED, game.getPlayerInTurn());
 	}
 
@@ -121,19 +120,17 @@ public class TestAlphaCiv {
 
 	@Test
 	public void shouldAge100YearsAfterRound() {
-		game.endOfTurn();
-		game.endOfTurn();
+		playRounds(1);
 		assertEquals(GameConstants.STARTAGE + GameConstants.YEARSPERROUND, game.getAge());
-		game.endOfTurn();
-		game.endOfTurn();
+		playRounds(1);
 		assertEquals(GameConstants.STARTAGE + 2 * GameConstants.YEARSPERROUND, game.getAge());
 	}
 
 	@Test
 	public void redShouldWinAt3000BC() {
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 10; i++) {
 			assertNull(game.getWinner());
-			game.endOfTurn();
+			playRounds(1);
 		}
 		assertEquals(-3000, game.getAge());
 		assertEquals(Player.RED, game.getWinner());
@@ -216,10 +213,7 @@ public class TestAlphaCiv {
 	public void producesArcherAtEndOfTwoRound() {
 		City c1 = game.getCityAt(new Position(1, 1));
 		assertNotNull(c1);
-		game.endOfTurn();
-		game.endOfTurn();
-		game.endOfTurn();
-		game.endOfTurn();
+		playRounds(2);
 		Unit newUnit = game.getUnitAt(new Position(1, 1));
 		assertNotNull(newUnit);
 		assertEquals(GameConstants.ARCHER, newUnit.getTypeString());
