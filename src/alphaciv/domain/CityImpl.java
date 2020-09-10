@@ -44,6 +44,10 @@ public class CityImpl implements City {
 		resources += amount;
 	}
 
+	public void removeResources(int amount) {
+		resources -= amount;
+	}
+
 	public void setProductionType(String unitType) {
 		productionType = unitType;
 	}

@@ -132,6 +132,7 @@ public class GameImpl implements Game {
 			return;
 		}
 		units[position.getRow()][position.getColumn()] = new UnitImpl(c.getProduction(), c.getOwner());
+		c.removeResources(GameConstants.getCostForUnit(c.getProduction()));
 	}
 
 	public void changeWorkForceFocusInCityAt(Position p, String balance) {
