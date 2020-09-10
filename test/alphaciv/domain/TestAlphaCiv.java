@@ -192,63 +192,87 @@ public class TestAlphaCiv {
 		assertEquals(Player.RED, newUnit.getOwner());
 		assertEquals(GameConstants.SETTLER, newUnit.getTypeString());
 	}
-	@Test 
+
+	@Test
 	public void cityProductionIsArcherByDefault() {
-		City c1 = game.getCityAt(new Position(1,1));
+		City c1 = game.getCityAt(new Position(1, 1));
 		assertNotNull(c1);
-		assertEquals(GameConstants.ARCHER,c1.getProduction());
+		assertEquals(GameConstants.ARCHER, c1.getProduction());
 	}
+
 	@Test
 	public void producesArcherAtEndOfTwoRound() {
-		City c1 = game.getCityAt(new Position(1,1));
+		City c1 = game.getCityAt(new Position(1, 1));
 		assertNotNull(c1);
 		game.endOfTurn();
 		game.endOfTurn();
 		game.endOfTurn();
 		game.endOfTurn();
-	    Unit newUnit = game.getUnitAt(new Position(1,1));
-	    assertNotNull(newUnit);
-	    assertEquals(GameConstants.ARCHER, newUnit.getTypeString());
-	    assertEquals(Player.RED, newUnit.getOwner());
+		Unit newUnit = game.getUnitAt(new Position(1, 1));
+		assertNotNull(newUnit);
+		assertEquals(GameConstants.ARCHER, newUnit.getTypeString());
+		assertEquals(Player.RED, newUnit.getOwner());
 	}
+
 	@Test
 	public void placesUnitsAroundCity() {
-		City c1 = game.getCityAt(new Position(1,1));
+		City c1 = game.getCityAt(new Position(1, 1));
 		assertNotNull(c1);
-		for(int i=0; i<8; i++) {
+		for (int i = 0; i < 8; i++) {
 			game.endOfTurn();
 		}
-	    Unit u1 = game.getUnitAt(new Position(0,1));
-	    assertNotNull(u1); 
-	    assertEquals(GameConstants.ARCHER, u1.getTypeString());
-	    game.endOfTurn();
-	    game.endOfTurn();
-	    Unit u2 = game.getUnitAt(new Position(0,2));
-	    assertNotNull(u2); 
-	    assertEquals(GameConstants.ARCHER, u2.getTypeString());
-	    for(int i=0; i<4; i++) {
+		Unit u1 = game.getUnitAt(new Position(0, 1));
+		assertNotNull(u1);
+		assertEquals(GameConstants.ARCHER, u1.getTypeString());
+		game.endOfTurn();
+		game.endOfTurn();
+		Unit u2 = game.getUnitAt(new Position(0, 2));
+		assertNotNull(u2);
+		assertEquals(GameConstants.ARCHER, u2.getTypeString());
+		for (int i = 0; i < 4; i++) {
 			game.endOfTurn();
 		}
-	    Unit u3 = game.getUnitAt(new Position(1,2));
-	    assertNotNull(u3); 
-	    assertEquals(GameConstants.ARCHER, u3.getTypeString());
-	    for(int i=0; i<4; i++) {
+		Unit u3 = game.getUnitAt(new Position(1, 2));
+		assertNotNull(u3);
+		assertEquals(GameConstants.ARCHER, u3.getTypeString());
+		for (int i = 0; i < 4; i++) {
 			game.endOfTurn();
 		}
-	    Unit u4 = game.getUnitAt(new Position(2,1));
-	    assertNotNull(u4); 
-	    assertEquals(GameConstants.ARCHER, u4.getTypeString());
-	    game.endOfTurn();
-	    game.endOfTurn();
-	    Unit u5 = game.getUnitAt(new Position(0,0));
-	    assertNotNull(u5); 
-	    assertEquals(GameConstants.ARCHER, u5.getTypeString());
+		Unit u4 = game.getUnitAt(new Position(2, 1));
+		assertNotNull(u4);
+		assertEquals(GameConstants.ARCHER, u4.getTypeString());
+		game.endOfTurn();
+		game.endOfTurn();
+		Unit u5 = game.getUnitAt(new Position(0, 0));
+		assertNotNull(u5);
+		assertEquals(GameConstants.ARCHER, u5.getTypeString());
 	}
-	@Test 
+
+	@Test
 	public void populationOfCityShouldBe1() {
-		City c1 = game.getCityAt(new Position(1,1));
+		City c1 = game.getCityAt(new Position(1, 1));
 		assertNotNull(c1);
-		assertEquals(1,c1.getSize());
+		assertEquals(1, c1.getSize());
 	}
-	
+
+	@Test
+	public void canChangeProductionTypeForCity() {
+		City c1 = game.getCityAt(new Position(1, 1));
+		assertNotNull(c1);
+		assertEquals(GameConstants.ARCHER, c1.getProduction());
+		game.changeProductionInCityAt(new Position(1, 1), GameConstants.SETTLER);
+		assertEquals(GameConstants.SETTLER, c1.getProduction());
+		game.changeProductionInCityAt(new Position(1, 1), GameConstants.LEGION);
+		assertEquals(GameConstants.LEGION, c1.getProduction());
+	}
+
+	@Test
+	public void cannotChangeProductionWhenNotInTurn() {
+		City c1 = game.getCityAt(new Position(4, 1));
+		assertNotNull(c1);
+		assertEquals(GameConstants.ARCHER, c1.getProduction());
+		game.changeProductionInCityAt(new Position(4, 1), GameConstants.SETTLER);
+		assertEquals(GameConstants.ARCHER, c1.getProduction());
+	}
+
 }
