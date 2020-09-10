@@ -276,7 +276,9 @@ public class TestAlphaCiv {
 	}
 
 	private void playRounds(int rounds) {
-		for (int i = 0; i < rounds * 2; i++) {
+		for (int i = 0; i < rounds; i++) {
+			// call endOfTurn twice to play one round, since there are two players
+			game.endOfTurn();
 			game.endOfTurn();
 		}
 	}
