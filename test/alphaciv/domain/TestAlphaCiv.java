@@ -30,24 +30,41 @@ public class TestAlphaCiv {
 	}
 
 	@Test
-	public void shouldHaveRedCityAt1_1() {
-		City c = game.getCityAt(new Position(1, 1));
-		assertNotNull("There should be a city at (1,1)", c);
-		Player p = c.getOwner();
-		assertEquals("City at (1,1) should be owned by red", Player.RED, p);
+	public void shouldHaveCorrectInitialCities() {
+		City c1 = game.getCityAt(new Position(1, 1));
+		assertNotNull(c1);
+		assertEquals(Player.RED, c1.getOwner());
+
+		City c2 = game.getCityAt(new Position(4, 1));
+		assertNotNull(c2);
+		assertEquals(Player.BLUE, c2.getOwner());
 	}
 
 	@Test
-	public void shouldBeRedTurnFirst() {
-		assertEquals(Player.RED, game.getPlayerInTurn());
+	public void shouldNotHaveCityAt15_15() {
+		City c = game.getCityAt(new Position(15, 15));
+		assertNull(c);
 	}
 
 	@Test
 	public void shouldHaveOceanAt1_0() {
 		Tile t = game.getTileAt(new Position(1, 0));
-		assertNotNull("There should be a tile at (1,0)", t);
-		String type = t.getTypeString();
-		assertEquals("Tile at (1,0) should have type ocean", GameConstants.OCEANS, type);
+		assertNotNull(t);
+		assertEquals(GameConstants.OCEANS, t.getTypeString());
+	}
+
+	@Test
+	public void shouldHaveHillAt0_1() {
+		Tile t = game.getTileAt(new Position(0, 1));
+		assertNotNull(t);
+		assertEquals(GameConstants.HILLS, t.getTypeString());
+	}
+
+	@Test
+	public void shouldHaveMountainAt2_2() {
+		Tile t = game.getTileAt(new Position(2, 2));
+		assertNotNull(t);
+		assertEquals(GameConstants.MOUNTAINS, t.getTypeString());
 	}
 
 	@Test
@@ -58,35 +75,21 @@ public class TestAlphaCiv {
 	}
 
 	@Test
-	public void shouldHaveMountainAt2_2() {
-		Tile t = game.getTileAt(new Position(2, 2));
-		assertNotNull("There should be a tile at (2,2)", t);
-		String type = t.getTypeString();
-		assertEquals("Tile at (2,2) should have type mountain", GameConstants.MOUNTAINS, type);
-	}
-
-	@Test
-	public void shouldHaveHillAt0_1() {
-		Tile t = game.getTileAt(new Position(0, 1));
-		assertNotNull("There should be a tile at (0,1)", t);
-		String type = t.getTypeString();
-		assertEquals("Tile at (0,1) should have type hill", GameConstants.HILLS, type);
-	}
-
-	@Test
 	public void shouldHaveCorrectInitialUnits() {
 		Unit u1 = game.getUnitAt(new Position(2, 0));
-		assertNotNull("There should be a unit at (2,0)", u1);
-		assertEquals("There is an Archer in tile (2,0)", GameConstants.ARCHER, u1.getTypeString());
-		assertEquals("Archer should be red", Player.RED, u1.getOwner());
+		assertNotNull(u1);
+		assertEquals(GameConstants.ARCHER, u1.getTypeString());
+		assertEquals(Player.RED, u1.getOwner());
+
 		Unit u2 = game.getUnitAt(new Position(3, 2));
-		assertNotNull("There should be a unit at (3,2)", u2);
-		assertEquals("There is an legion in tile (3,2)", GameConstants.LEGION, u2.getTypeString());
-		assertEquals("Legion should be blue", Player.BLUE, u2.getOwner());
+		assertNotNull(u2);
+		assertEquals(GameConstants.LEGION, u2.getTypeString());
+		assertEquals(Player.BLUE, u2.getOwner());
+
 		Unit u3 = game.getUnitAt(new Position(4, 3));
-		assertNotNull("There should be a unit at (4,3)", u3);
-		assertEquals("There is an settler in tile (4,3)", GameConstants.SETTLER, u3.getTypeString());
-		assertEquals("Settler should be red", Player.RED, u3.getOwner());
+		assertNotNull(u3);
+		assertEquals(GameConstants.SETTLER, u3.getTypeString());
+		assertEquals(Player.RED, u3.getOwner());
 	}
 
 	@Test
@@ -96,9 +99,8 @@ public class TestAlphaCiv {
 	}
 
 	@Test
-	public void shouldNotHaveCityAt15_15() {
-		City c = game.getCityAt(new Position(15, 15));
-		assertNull(c);
+	public void shouldBeRedTurnFirst() {
+		assertEquals(Player.RED, game.getPlayerInTurn());
 	}
 
 	@Test
@@ -164,6 +166,13 @@ public class TestAlphaCiv {
 	}
 
 	@Test
+	public void cannotMoveIntoMountainsOrOceans() {
+		assertFalse(game.moveUnit(new Position(2, 0), new Position(1, 0)));
+		game.endOfTurn();
+		assertFalse(game.moveUnit(new Position(3, 2), new Position(2, 2)));
+	}
+
+	@Test
 	public void canOnlyMoveUnitsWhenItsOwnersTurn() {
 		assertFalse(game.moveUnit(new Position(3, 2), new Position(4, 1)));
 		Unit u2 = game.getUnitAt(new Position(4, 1));
@@ -172,24 +181,6 @@ public class TestAlphaCiv {
 		assertFalse(game.moveUnit(new Position(2, 0), new Position(2, 1)));
 		Unit u1 = game.getUnitAt(new Position(2, 1));
 		assertNull(u1);
-	}
-
-	@Test
-	public void cannotMoveIntoMountainsOrOceans() {
-		assertFalse(game.moveUnit(new Position(2, 0), new Position(1, 0)));
-		game.endOfTurn();
-		assertFalse(game.moveUnit(new Position(3, 2), new Position(2, 2)));
-	}
-
-	@Test
-	public void shouldHaveCorrectInitialCities() {
-		City c1 = game.getCityAt(new Position(1, 1));
-		assertNotNull(c1);
-		assertEquals(Player.RED, c1.getOwner());
-
-		City c2 = game.getCityAt(new Position(4, 1));
-		assertNotNull(c2);
-		assertEquals(Player.BLUE, c2.getOwner());
 	}
 
 	@Test
@@ -210,7 +201,7 @@ public class TestAlphaCiv {
 	}
 
 	@Test
-	public void producesArcherAtEndOfTwoRound() {
+	public void citiesProduceArcherAfterTwoRounds() {
 		City c1 = game.getCityAt(new Position(1, 1));
 		assertNotNull(c1);
 		playRounds(2);
@@ -221,7 +212,7 @@ public class TestAlphaCiv {
 	}
 
 	@Test
-	public void placesUnitsAroundCity() {
+	public void unitsSpawnedClockwiseAroundCity() {
 		City c1 = game.getCityAt(new Position(1, 1));
 		assertNotNull(c1);
 
@@ -256,9 +247,11 @@ public class TestAlphaCiv {
 	}
 
 	@Test
-	public void populationOfCityShouldBe1() {
+	public void populationOfCityShouldAlwaysBe1() {
 		City c1 = game.getCityAt(new Position(1, 1));
 		assertNotNull(c1);
+		assertEquals(1, c1.getSize());
+		playRounds(5);
 		assertEquals(1, c1.getSize());
 	}
 
