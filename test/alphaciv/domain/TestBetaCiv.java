@@ -45,7 +45,17 @@ public class TestBetaCiv {
 		assertEquals(Player.RED, c.getOwner());
 		assertEquals(Player.RED, game.getWinner());
 	}
-
+	@Test 
+	public void blueConquersRedCity() {
+		game.endOfTurn();
+		game.moveUnit(new Position (3, 2), new Position (2,1));
+		game.endOfTurn();
+		game.endOfTurn();
+		game.moveUnit(new Position (2, 1), new Position (1,1));
+		City c = game.getCityAt(new Position(1,1));
+		assertEquals(Player.BLUE, c.getOwner());
+		assertEquals(Player.BLUE, game.getWinner());
+	}
 	private void playRounds(int rounds) {
 		for (int i = 0; i < rounds; i++) {
 			// call endOfTurn twice to play one round, since there are two players
