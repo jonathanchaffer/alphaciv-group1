@@ -20,8 +20,11 @@ public class GameImpl implements Game {
 	private Player playerInTurn;
 	private int age = GameConstants.STARTAGE;
 
+	private AgingStrategy agingStrategy;
+
 	public GameImpl() {
 		playerInTurn = Player.RED;
+		agingStrategy = new AlphaAgingStrategy();
 
 		cities[1][1] = new CityImpl(Player.RED);
 		cities[4][1] = new CityImpl(Player.BLUE);
@@ -84,7 +87,7 @@ public class GameImpl implements Game {
 			playerInTurn = Player.BLUE;
 		} else {
 			playerInTurn = Player.RED;
-			age += GameConstants.YEARSPERROUND;
+			age = agingStrategy.getNewAge(age);
 			gatherAllCitiesResources();
 			produceAllCitiesUnits();
 		}

@@ -19,8 +19,6 @@ public class GameConstants {
 	public static final int WORLDSIZE = 16;
 	// The age at the start of the game
 	public static final int STARTAGE = -4000;
-	// The number of years per round
-	public static final int YEARSPERROUND = 100;
 	// production to produce per round
 	public static final int PRODPERROUND = 6;
 	// Valid unit types

@@ -123,9 +123,9 @@ public class TestAlphaCiv {
 	@Test
 	public void shouldAge100YearsAfterRound() {
 		playRounds(1);
-		assertEquals(GameConstants.STARTAGE + GameConstants.YEARSPERROUND, game.getAge());
+		assertEquals(GameConstants.STARTAGE + 100, game.getAge());
 		playRounds(1);
-		assertEquals(GameConstants.STARTAGE + 2 * GameConstants.YEARSPERROUND, game.getAge());
+		assertEquals(GameConstants.STARTAGE + 2 * 100, game.getAge());
 	}
 
 	@Test
