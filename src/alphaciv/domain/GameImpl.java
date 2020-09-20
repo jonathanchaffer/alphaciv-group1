@@ -28,6 +28,8 @@ public class GameImpl implements Game {
 		switch (version) {
 		case alphaCiv:
 			agingStrategy = new AlphaAgingStrategy();
+		default:
+			agingStrategy = new AlphaAgingStrategy();
 		}
 
 		cities[1][1] = new CityImpl(Player.RED);
