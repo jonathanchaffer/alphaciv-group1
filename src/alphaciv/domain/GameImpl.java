@@ -21,20 +21,24 @@ public class GameImpl implements Game {
 	private int age = GameConstants.STARTAGE;
 
 	private AgingStrategy agingStrategy;
-
+	private WinningStrategy winningStrategy;
+	
 	public GameImpl(GameVersion version) {
 		playerInTurn = Player.RED;
 
 		switch (version) {
 		case alphaCiv:
 			agingStrategy = new AlphaAgingStrategy();
+			winningStrategy = new AlphaWinningStrategy();
 			break;
 		case betaCiv:
 			agingStrategy = new BetaAgingStrategy();
+			winningStrategy = new BetaWinningStrategy();
 			break;
 		default:
 			agingStrategy = null;
 			break;
+		
 		}
 
 		cities[1][1] = new CityImpl(Player.RED);
@@ -68,9 +72,8 @@ public class GameImpl implements Game {
 	}
 
 	public Player getWinner() {
-		if (age == -3000)
-			return Player.RED;
-		return null;
+			return winningStrategy.getWinner(age, cities);
+	
 	}
 
 	public int getAge() {
@@ -88,6 +91,9 @@ public class GameImpl implements Game {
 		if (Math.abs(to.getRow() - from.getRow()) <= 1 && Math.abs(to.getColumn() - from.getColumn()) <= 1) {
 			units[to.getRow()][to.getColumn()] = unitAtFromPosition;
 			units[from.getRow()][from.getColumn()] = null;
+			if(getCityAt(to) != null) {
+				((CityImpl) getCityAt(to)).setOwner(unitAtFromPosition.getOwner());
+			}
 			return true;
 		}
 		return false;

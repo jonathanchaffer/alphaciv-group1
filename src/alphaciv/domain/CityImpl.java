@@ -12,6 +12,10 @@ public class CityImpl implements City {
 		populationSize = 1;
 	}
 
+	public void setOwner(Player player) {
+		owner = player;
+	}
+	
 	@Override
 	public Player getOwner() {
 		return owner;

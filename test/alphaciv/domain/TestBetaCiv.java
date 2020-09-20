@@ -44,7 +44,6 @@ public class TestBetaCiv {
 		City c = game.getCityAt(new Position(4,1));
 		assertEquals(Player.RED, c.getOwner());
 		assertEquals(Player.RED, game.getWinner());
-		
 	}
 
 	private void playRounds(int rounds) {
