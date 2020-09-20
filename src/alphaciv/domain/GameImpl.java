@@ -22,9 +22,13 @@ public class GameImpl implements Game {
 
 	private AgingStrategy agingStrategy;
 
-	public GameImpl() {
+	public GameImpl(GameVersion version) {
 		playerInTurn = Player.RED;
-		agingStrategy = new AlphaAgingStrategy();
+
+		switch (version) {
+		case alphaCiv:
+			agingStrategy = new AlphaAgingStrategy();
+		}
 
 		cities[1][1] = new CityImpl(Player.RED);
 		cities[4][1] = new CityImpl(Player.BLUE);
