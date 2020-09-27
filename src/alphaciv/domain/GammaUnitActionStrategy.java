@@ -4,8 +4,10 @@ public class GammaUnitActionStrategy implements UnitActionStrategy {
 
 	@Override
 	public void performUnitAction(Position p, Unit[][] units) {
-		// TODO Auto-generated method stub
 
+		if(units[p.getRow()][p.getColumn()].getTypeString() == GameConstants.SETTLER){
+			units[p.getRow()][p.getColumn()] = null;		
+		}
 	}
 
 }
