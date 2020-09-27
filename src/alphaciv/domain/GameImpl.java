@@ -23,23 +23,10 @@ public class GameImpl implements Game {
 	private AgingStrategy agingStrategy;
 	private WinningStrategy winningStrategy;
 	
-	public GameImpl(GameVersion version) {
+	public GameImpl(AgingStrategy agingStrategy, WinningStrategy winningStrategy) {
 		playerInTurn = Player.RED;
-
-		switch (version) {
-		case alphaCiv:
-			agingStrategy = new AlphaAgingStrategy();
-			winningStrategy = new AlphaWinningStrategy();
-			break;
-		case betaCiv:
-			agingStrategy = new BetaAgingStrategy();
-			winningStrategy = new BetaWinningStrategy();
-			break;
-		default:
-			agingStrategy = null;
-			break;
-		
-		}
+		this.agingStrategy = agingStrategy;
+		this.winningStrategy = winningStrategy; 
 
 		cities[1][1] = new CityImpl(Player.RED);
 		cities[4][1] = new CityImpl(Player.BLUE);

@@ -7,10 +7,10 @@ import org.junit.Test;
 
 public class TestBetaCiv {
 	private Game game;
-
+	
 	@Before
 	public void setUp() {
-		game = new GameImpl(GameVersion.betaCiv);
+		game = new BetaGameFactory().createGame();
 	}
 
 	@Test
