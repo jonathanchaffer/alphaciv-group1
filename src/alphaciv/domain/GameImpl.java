@@ -22,11 +22,13 @@ public class GameImpl implements Game {
 
 	private AgingStrategy agingStrategy;
 	private WinningStrategy winningStrategy;
+	private UnitActionStrategy unitActionStrategy;
 	
-	public GameImpl(AgingStrategy agingStrategy, WinningStrategy winningStrategy) {
+	public GameImpl(AgingStrategy agingStrategy, WinningStrategy winningStrategy, UnitActionStrategy unitActionStrategy) {
 		playerInTurn = Player.RED;
 		this.agingStrategy = agingStrategy;
 		this.winningStrategy = winningStrategy; 
+		this.unitActionStrategy = unitActionStrategy;
 
 		cities[1][1] = new CityImpl(Player.RED);
 		cities[4][1] = new CityImpl(Player.BLUE);
@@ -153,5 +155,6 @@ public class GameImpl implements Game {
 	}
 
 	public void performUnitActionAt(Position p) {
+		unitActionStrategy.performUnitAction(p, units);
 	}
 }
