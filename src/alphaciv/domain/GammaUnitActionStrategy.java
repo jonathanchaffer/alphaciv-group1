@@ -3,10 +3,15 @@ package alphaciv.domain;
 public class GammaUnitActionStrategy implements UnitActionStrategy {
 
 	@Override
-	public void performUnitAction(Position p, Unit[][] units) {
+	public void performUnitAction(Position p, UnitActionRequirements requirements) {
+		Unit[][] units = requirements.getUnits();
+		City[][] cities = requirements.getCities();
 
-		if(units[p.getRow()][p.getColumn()].getTypeString() == GameConstants.SETTLER){
-			units[p.getRow()][p.getColumn()] = null;		
+		Unit unit = units[p.getRow()][p.getColumn()];
+
+		if (unit.getTypeString() == GameConstants.SETTLER) {
+			cities[p.getRow()][p.getColumn()] = new CityImpl(unit.getOwner());
+			units[p.getRow()][p.getColumn()] = null;
 		}
 	}
 

@@ -23,11 +23,12 @@ public class GameImpl implements Game {
 	private AgingStrategy agingStrategy;
 	private WinningStrategy winningStrategy;
 	private UnitActionStrategy unitActionStrategy;
-	
-	public GameImpl(AgingStrategy agingStrategy, WinningStrategy winningStrategy, UnitActionStrategy unitActionStrategy) {
+
+	public GameImpl(AgingStrategy agingStrategy, WinningStrategy winningStrategy,
+			UnitActionStrategy unitActionStrategy) {
 		playerInTurn = Player.RED;
 		this.agingStrategy = agingStrategy;
-		this.winningStrategy = winningStrategy; 
+		this.winningStrategy = winningStrategy;
 		this.unitActionStrategy = unitActionStrategy;
 
 		cities[1][1] = new CityImpl(Player.RED);
@@ -61,8 +62,8 @@ public class GameImpl implements Game {
 	}
 
 	public Player getWinner() {
-			return winningStrategy.getWinner(age, cities);
-	
+		return winningStrategy.getWinner(age, cities);
+
 	}
 
 	public int getAge() {
@@ -80,7 +81,7 @@ public class GameImpl implements Game {
 		if (Math.abs(to.getRow() - from.getRow()) <= 1 && Math.abs(to.getColumn() - from.getColumn()) <= 1) {
 			units[to.getRow()][to.getColumn()] = unitAtFromPosition;
 			units[from.getRow()][from.getColumn()] = null;
-			if(getCityAt(to) != null) {
+			if (getCityAt(to) != null) {
 				((CityImpl) getCityAt(to)).setOwner(unitAtFromPosition.getOwner());
 			}
 			return true;
@@ -155,6 +156,6 @@ public class GameImpl implements Game {
 	}
 
 	public void performUnitActionAt(Position p) {
-		unitActionStrategy.performUnitAction(p, units);
+		unitActionStrategy.performUnitAction(p, new UnitActionRequirementsImpl(cities, units));
 	}
 }

@@ -10,7 +10,7 @@ package alphaciv.domain;
 public class AlphaUnitActionStrategy implements UnitActionStrategy {
 
 	@Override
-	public void performUnitAction(Position p, Unit[][] units) {
+	public void performUnitAction(Position p, UnitActionRequirements requirements) {
 	}
 
 }
