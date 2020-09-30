@@ -156,6 +156,8 @@ public class GameImpl implements Game {
 	}
 
 	public void performUnitActionAt(Position p) {
-		unitActionStrategy.performUnitAction(p, new UnitActionRequirementsImpl(cities, units));
+		if (playerInTurn == getUnitAt(p).getOwner()) {
+			unitActionStrategy.performUnitAction(p, new UnitActionRequirementsImpl(cities, units));
+		}
 	}
 }
