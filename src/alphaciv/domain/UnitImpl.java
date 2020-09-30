@@ -35,5 +35,8 @@ public class UnitImpl implements Unit {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	public boolean isFortified() {
+		return false;
+	}
 
 }
