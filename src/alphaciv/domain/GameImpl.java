@@ -23,13 +23,15 @@ public class GameImpl implements Game {
 	private AgingStrategy agingStrategy;
 	private WinningStrategy winningStrategy;
 	private UnitActionStrategy unitActionStrategy;
+	private UnitMovementStrategy unitMovementStrategy;
 
 	public GameImpl(AgingStrategy agingStrategy, WinningStrategy winningStrategy,
-			UnitActionStrategy unitActionStrategy) {
+			UnitActionStrategy unitActionStrategy, UnitMovementStrategy unitMovementStrategy) {
 		playerInTurn = Player.RED;
 		this.agingStrategy = agingStrategy;
 		this.winningStrategy = winningStrategy;
 		this.unitActionStrategy = unitActionStrategy;
+		this.unitMovementStrategy = unitMovementStrategy;
 
 		cities[1][1] = new CityImpl(Player.RED);
 		cities[4][1] = new CityImpl(Player.BLUE);
@@ -71,22 +73,9 @@ public class GameImpl implements Game {
 	}
 
 	public boolean moveUnit(Position from, Position to) {
-		Unit unitAtFromPosition = getUnitAt(from);
-		Tile tileAtToPosition = getTileAt(to);
-		if (tileAtToPosition.getTypeString().equals(GameConstants.OCEANS)
-				|| tileAtToPosition.getTypeString().equals(GameConstants.MOUNTAINS))
+		if (getUnitAt(from).getOwner() != playerInTurn)
 			return false;
-		if (unitAtFromPosition.getOwner() != playerInTurn)
-			return false;
-		if (Math.abs(to.getRow() - from.getRow()) <= 1 && Math.abs(to.getColumn() - from.getColumn()) <= 1) {
-			units[to.getRow()][to.getColumn()] = unitAtFromPosition;
-			units[from.getRow()][from.getColumn()] = null;
-			if (getCityAt(to) != null) {
-				((CityImpl) getCityAt(to)).setOwner(unitAtFromPosition.getOwner());
-			}
-			return true;
-		}
-		return false;
+		return unitMovementStrategy.moveUnit(from, to, new UnitMovementRequirementsImpl(getTileAt(to), cities, units));
 	}
 
 	public void endOfTurn() {
