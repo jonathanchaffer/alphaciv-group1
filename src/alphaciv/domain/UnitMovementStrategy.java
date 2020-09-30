@@ -1,6 +1,5 @@
 package alphaciv.domain;
 
 public interface UnitMovementStrategy {
-
-	public boolean moveUnit(Position from, Position to, UnitMovementRequirements requirements);
+	public boolean canMoveUnit(Unit u);
 }
