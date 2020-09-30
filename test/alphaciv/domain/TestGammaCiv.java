@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,6 +59,18 @@ public class TestGammaCiv {
 		assertEquals(GameConstants.ARCHER, unit3.getTypeString());
 		assertFalse(unit3.isFortified());
 		
+	}
+	@Test
+	public void fortifiedArchersShouldNotMove() {
+		UnitImpl unit3 = (UnitImpl) game.getUnitAt(new Position(2,0));
+		assertNotNull(unit3);
+		assertEquals(GameConstants.ARCHER, unit3.getTypeString());
+		assertFalse(unit3.isFortified());
+		game.performUnitActionAt(new Position(2,0));
+		assertTrue(unit3.isFortified()); 
+		assertFalse(game.moveUnit(new Position(2,0), new Position(2,1)));
+		assertNull(game.getUnitAt(new Position(2,1))); 
+		assertNotNull(game.getUnitAt(new Position(2,0)));
 	}
 
 }

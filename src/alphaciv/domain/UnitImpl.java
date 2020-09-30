@@ -3,6 +3,8 @@ package alphaciv.domain;
 public class UnitImpl implements Unit {
 	String unitType;
 	Player owner;
+	boolean fortified = false;
+	
 	public UnitImpl (String unitType, Player owner) {
 		this.unitType = unitType;
 		this.owner = owner;
@@ -36,7 +38,10 @@ public class UnitImpl implements Unit {
 		return 0;
 	}
 	public boolean isFortified() {
-		return false;
+		return fortified;
+	}
+	public void toggleIsFortified(){
+		fortified = !fortified;
 	}
 
 }
