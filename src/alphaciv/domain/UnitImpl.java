@@ -28,15 +28,22 @@ public class UnitImpl implements Unit {
 
 	@Override
 	public int getDefensiveStrength() {
+		int strength = 0;
 		switch (unitType) {		
 		case GameConstants.ARCHER:
-			return 3;
+			strength = 3;
+			if(isFortified()) {
+				strength *= 2;
+			}
+			break;
 		case GameConstants.SETTLER:
-			return 3;
+			strength = 3;
+			break;
 		case GameConstants.LEGION:
-			return 2; 
+			strength = 2;
+			break;
 		}
-		return 0;
+		return strength;
 	}
 
 	@Override

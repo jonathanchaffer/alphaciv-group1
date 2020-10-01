@@ -89,5 +89,15 @@ public class TestGammaCiv {
 		assertEquals(GameConstants.ARCHER, unit3.getTypeString());
 		assertEquals(3, unit3.getDefensiveStrength());
 	}
+	@Test
+	public void fortifiedArcherDefensiveStrengthIsDoubled() {
+		UnitImpl unit3 = (UnitImpl) game.getUnitAt(new Position(2,0));
+		assertNotNull(unit3);
+		assertEquals(GameConstants.ARCHER, unit3.getTypeString());
+		assertFalse(unit3.isFortified());
+		game.performUnitActionAt(new Position(2,0));
+		assertTrue(unit3.isFortified()); 
+		assertEquals(6, unit3.getDefensiveStrength());
+	}
 
 }
