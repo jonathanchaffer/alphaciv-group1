@@ -4,8 +4,8 @@ public class UnitImpl implements Unit {
 	String unitType;
 	Player owner;
 	boolean fortified = false;
-	
-	public UnitImpl (String unitType, Player owner) {
+
+	public UnitImpl(String unitType, Player owner) {
 		this.unitType = unitType;
 		this.owner = owner;
 	}
@@ -29,10 +29,10 @@ public class UnitImpl implements Unit {
 	@Override
 	public int getDefensiveStrength() {
 		int strength = 0;
-		switch (unitType) {		
+		switch (unitType) {
 		case GameConstants.ARCHER:
 			strength = 3;
-			if(isFortified()) {
+			if (isFortified()) {
 				strength *= 2;
 			}
 			break;
@@ -51,10 +51,12 @@ public class UnitImpl implements Unit {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 	public boolean isFortified() {
 		return fortified;
 	}
-	public void toggleIsFortified(){
+
+	public void toggleIsFortified() {
 		fortified = !fortified;
 	}
 

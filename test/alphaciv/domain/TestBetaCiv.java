@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class TestBetaCiv {
 	private Game game;
-	
+
 	@Before
 	public void setUp() {
 		game = new BetaGameFactory().createGame();

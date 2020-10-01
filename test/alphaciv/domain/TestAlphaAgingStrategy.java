@@ -1,6 +1,6 @@
 package alphaciv.domain;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,12 +8,12 @@ import org.junit.Test;
 public class TestAlphaAgingStrategy {
 
 	AlphaAgingStrategy agingStrategy;
-	
+
 	@Before
 	public void setUp() {
 		agingStrategy = new AlphaAgingStrategy();
 	}
-	
+
 	@Test
 	public void testGetNewAge() {
 		assertEquals(200, agingStrategy.getNewAge(100));

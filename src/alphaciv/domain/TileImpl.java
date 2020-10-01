@@ -2,7 +2,7 @@ package alphaciv.domain;
 
 public class TileImpl implements Tile {
 	String type;
-	
+
 	public TileImpl(String type) {
 		this.type = type;
 	}

@@ -12,8 +12,8 @@ public class GammaUnitActionStrategy implements UnitActionStrategy {
 		if (unit.getTypeString() == GameConstants.SETTLER) {
 			cities[p.getRow()][p.getColumn()] = new CityImpl(unit.getOwner());
 			units[p.getRow()][p.getColumn()] = null;
-		}else if(unit.getTypeString() == GameConstants.ARCHER) {
-			((UnitImpl) unit).toggleIsFortified(); 
+		} else if (unit.getTypeString() == GameConstants.ARCHER) {
+			((UnitImpl) unit).toggleIsFortified();
 		}
 	}
 

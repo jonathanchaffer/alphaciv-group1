@@ -42,61 +42,65 @@ public class TestGammaCiv {
 		assertNotNull(game.getUnitAt(new Position(4, 3)));
 		assertNull(game.getCityAt(new Position(4, 3)));
 	}
+
 	@Test
 	public void unitsShouldNotBeFortifiedByDefault() {
-		UnitImpl unit1 = (UnitImpl) game.getUnitAt(new Position(4,3));
+		UnitImpl unit1 = (UnitImpl) game.getUnitAt(new Position(4, 3));
 		assertNotNull(unit1);
 		assertEquals(GameConstants.SETTLER, unit1.getTypeString());
 		assertFalse(unit1.isFortified());
-		
-		UnitImpl unit2 = (UnitImpl) game.getUnitAt(new Position(3,2));
+
+		UnitImpl unit2 = (UnitImpl) game.getUnitAt(new Position(3, 2));
 		assertNotNull(unit2);
 		assertEquals(GameConstants.LEGION, unit2.getTypeString());
 		assertFalse(unit2.isFortified());
-		
-		UnitImpl unit3 = (UnitImpl) game.getUnitAt(new Position(2,0));
+
+		UnitImpl unit3 = (UnitImpl) game.getUnitAt(new Position(2, 0));
 		assertNotNull(unit3);
 		assertEquals(GameConstants.ARCHER, unit3.getTypeString());
 		assertFalse(unit3.isFortified());
-		
+
 	}
+
 	@Test
 	public void fortifiedArchersShouldNotMove() {
-		UnitImpl unit3 = (UnitImpl) game.getUnitAt(new Position(2,0));
+		UnitImpl unit3 = (UnitImpl) game.getUnitAt(new Position(2, 0));
 		assertNotNull(unit3);
 		assertEquals(GameConstants.ARCHER, unit3.getTypeString());
 		assertFalse(unit3.isFortified());
-		game.performUnitActionAt(new Position(2,0));
-		assertTrue(unit3.isFortified()); 
-		assertFalse(game.moveUnit(new Position(2,0), new Position(2,1)));
-		assertNull(game.getUnitAt(new Position(2,1))); 
-		assertNotNull(game.getUnitAt(new Position(2,0)));
+		game.performUnitActionAt(new Position(2, 0));
+		assertTrue(unit3.isFortified());
+		assertFalse(game.moveUnit(new Position(2, 0), new Position(2, 1)));
+		assertNull(game.getUnitAt(new Position(2, 1)));
+		assertNotNull(game.getUnitAt(new Position(2, 0)));
 	}
+
 	@Test
 	public void shouldHaveCorrectDefensiveStrength() {
-		UnitImpl unit1 = (UnitImpl) game.getUnitAt(new Position(4,3));
+		UnitImpl unit1 = (UnitImpl) game.getUnitAt(new Position(4, 3));
 		assertNotNull(unit1);
 		assertEquals(GameConstants.SETTLER, unit1.getTypeString());
 		assertEquals(3, unit1.getDefensiveStrength());
-		
-		UnitImpl unit2 = (UnitImpl) game.getUnitAt(new Position(3,2));
+
+		UnitImpl unit2 = (UnitImpl) game.getUnitAt(new Position(3, 2));
 		assertNotNull(unit2);
 		assertEquals(GameConstants.LEGION, unit2.getTypeString());
 		assertEquals(2, unit2.getDefensiveStrength());
-		
-		UnitImpl unit3 = (UnitImpl) game.getUnitAt(new Position(2,0));
+
+		UnitImpl unit3 = (UnitImpl) game.getUnitAt(new Position(2, 0));
 		assertNotNull(unit3);
 		assertEquals(GameConstants.ARCHER, unit3.getTypeString());
 		assertEquals(3, unit3.getDefensiveStrength());
 	}
+
 	@Test
 	public void fortifiedArcherDefensiveStrengthIsDoubled() {
-		UnitImpl unit3 = (UnitImpl) game.getUnitAt(new Position(2,0));
+		UnitImpl unit3 = (UnitImpl) game.getUnitAt(new Position(2, 0));
 		assertNotNull(unit3);
 		assertEquals(GameConstants.ARCHER, unit3.getTypeString());
 		assertFalse(unit3.isFortified());
-		game.performUnitActionAt(new Position(2,0));
-		assertTrue(unit3.isFortified()); 
+		game.performUnitActionAt(new Position(2, 0));
+		assertTrue(unit3.isFortified());
 		assertEquals(6, unit3.getDefensiveStrength());
 	}
 
