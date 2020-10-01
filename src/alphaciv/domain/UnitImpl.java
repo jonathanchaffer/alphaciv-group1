@@ -28,7 +28,14 @@ public class UnitImpl implements Unit {
 
 	@Override
 	public int getDefensiveStrength() {
-		// TODO Auto-generated method stub
+		switch (unitType) {		
+		case GameConstants.ARCHER:
+			return 3;
+		case GameConstants.SETTLER:
+			return 3;
+		case GameConstants.LEGION:
+			return 2; 
+		}
 		return 0;
 	}
 

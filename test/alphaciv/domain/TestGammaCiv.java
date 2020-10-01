@@ -72,5 +72,22 @@ public class TestGammaCiv {
 		assertNull(game.getUnitAt(new Position(2,1))); 
 		assertNotNull(game.getUnitAt(new Position(2,0)));
 	}
+	@Test
+	public void shouldHaveCorrectDefensiveStrength() {
+		UnitImpl unit1 = (UnitImpl) game.getUnitAt(new Position(4,3));
+		assertNotNull(unit1);
+		assertEquals(GameConstants.SETTLER, unit1.getTypeString());
+		assertEquals(3, unit1.getDefensiveStrength());
+		
+		UnitImpl unit2 = (UnitImpl) game.getUnitAt(new Position(3,2));
+		assertNotNull(unit2);
+		assertEquals(GameConstants.LEGION, unit2.getTypeString());
+		assertEquals(2, unit2.getDefensiveStrength());
+		
+		UnitImpl unit3 = (UnitImpl) game.getUnitAt(new Position(2,0));
+		assertNotNull(unit3);
+		assertEquals(GameConstants.ARCHER, unit3.getTypeString());
+		assertEquals(3, unit3.getDefensiveStrength());
+	}
 
 }
