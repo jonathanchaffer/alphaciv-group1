@@ -31,6 +31,9 @@ public class DeltaWorldCreationStrategy implements WorldCreationStrategy {
 		}
 		cities[8][12] = new CityImpl(Player.RED);
 		cities[4][5] = new CityImpl(Player.BLUE);
+		units[3][8] = new UnitImpl(GameConstants.ARCHER, Player.BLUE);
+		units[4][4] = new UnitImpl(GameConstants.LEGION, Player.BLUE);
+		units[5][5] = new UnitImpl(GameConstants.SETTLER, Player.BLUE);
 	}
 
 }
