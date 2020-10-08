@@ -29,6 +29,8 @@ public class DeltaWorldCreationStrategy implements WorldCreationStrategy {
 				tiles[i][j] = new TileImpl(defaultTiles[i][j]);
 			}
 		}
+		cities[8][12] = new CityImpl(Player.RED);
+		cities[4][5] = new CityImpl(Player.BLUE);
 	}
 
 }
