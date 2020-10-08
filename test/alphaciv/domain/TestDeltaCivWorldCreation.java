@@ -27,6 +27,7 @@ public class TestDeltaCivWorldCreation {
 	@Test
 	public void createsDefaultCities() {
 		game = new DeltaGameFactory().createGame();
+
 		City c1 = game.getCityAt(new Position(8, 12));
 		assertNotNull(c1);
 		assertEquals(Player.RED, c1.getOwner());
@@ -36,6 +37,28 @@ public class TestDeltaCivWorldCreation {
 		assertEquals(Player.BLUE, c2.getOwner());
 
 		assertNull(game.getCityAt(new Position(7, 4)));
+	}
+
+	@Test
+	public void createsDefaultUnits() {
+		game = new DeltaGameFactory().createGame();
+
+		Unit u1 = game.getUnitAt(new Position(3, 8));
+		assertNotNull(u1);
+		assertEquals(Player.BLUE, u1.getOwner());
+		assertEquals(GameConstants.ARCHER, u1.getTypeString());
+
+		Unit u2 = game.getUnitAt(new Position(4, 4));
+		assertNotNull(u2);
+		assertEquals(Player.BLUE, u2.getOwner());
+		assertEquals(GameConstants.LEGION, u2.getTypeString());
+
+		Unit u3 = game.getUnitAt(new Position(5, 5));
+		assertNotNull(u3);
+		assertEquals(Player.BLUE, u3.getOwner());
+		assertEquals(GameConstants.SETTLER, u3.getTypeString());
+
+		assertNull(game.getUnitAt(new Position(14, 2)));
 	}
 
 }
