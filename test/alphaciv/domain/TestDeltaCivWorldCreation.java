@@ -61,4 +61,21 @@ public class TestDeltaCivWorldCreation {
 		assertNull(game.getUnitAt(new Position(14, 2)));
 	}
 
+	@Test
+	public void handlesCustomWorldCreation() {
+		game = new DeltaGameFactory(new DummyWorldCreationStrategy()).createGame();
+
+		assertEquals(GameConstants.HILLS, game.getTileAt(new Position(0, 0)).getTypeString());
+		assertEquals(GameConstants.PLAINS, game.getTileAt(new Position(1, 0)).getTypeString());
+
+		Unit u = game.getUnitAt(new Position(1, 1));
+		assertNotNull(u);
+		assertEquals(Player.GREEN, u.getOwner());
+		assertEquals(GameConstants.SETTLER, u.getTypeString());
+
+		City c = game.getCityAt(new Position(2, 2));
+		assertNotNull(c);
+		assertEquals(Player.YELLOW, c.getOwner());
+	}
+
 }
