@@ -24,23 +24,18 @@ public class GameImpl implements Game {
 	private WinningStrategy winningStrategy;
 	private UnitActionStrategy unitActionStrategy;
 	private UnitMovementStrategy unitMovementStrategy;
+	private WorldCreationStrategy worldCreationStrategy;
 
 	public GameImpl(AgingStrategy agingStrategy, WinningStrategy winningStrategy, UnitActionStrategy unitActionStrategy,
-			UnitMovementStrategy unitMovementStrategy) {
+			UnitMovementStrategy unitMovementStrategy, WorldCreationStrategy worldCreationStrategy) {
 		playerInTurn = Player.RED;
 		this.agingStrategy = agingStrategy;
 		this.winningStrategy = winningStrategy;
 		this.unitActionStrategy = unitActionStrategy;
 		this.unitMovementStrategy = unitMovementStrategy;
+		this.worldCreationStrategy = worldCreationStrategy;
 
-		cities[1][1] = new CityImpl(Player.RED);
-		cities[4][1] = new CityImpl(Player.BLUE);
-		tiles[1][0] = new TileImpl(GameConstants.OCEANS);
-		tiles[2][2] = new TileImpl(GameConstants.MOUNTAINS);
-		tiles[0][1] = new TileImpl(GameConstants.HILLS);
-		units[2][0] = new UnitImpl(GameConstants.ARCHER, Player.RED);
-		units[3][2] = new UnitImpl(GameConstants.LEGION, Player.BLUE);
-		units[4][3] = new UnitImpl(GameConstants.SETTLER, Player.RED);
+		this.worldCreationStrategy.createWorld(tiles, units, cities);
 	}
 
 	public Tile getTileAt(Position p) {
